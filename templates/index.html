@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Production Optimization</title>
+    <style>
+    body {
+        background-image: url(https://img.freepik.com/premium-photo/spring-grain-concept-agriculture-healthy-eating-organic-food-generative-ai_58409-32489.jpg?w=2000);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+    .centered-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .form {
+        max-width: 500px;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+    }
+    .form input[type="number"] {
+        width: 70%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .btn:hover {
+        background-color: #0056b3;
+    }
+    </style>
+</head>
+<body>
+    <div class="centered-container">
+        <form class="form fform" action="http://127.0.0.1:5000/prediction" target="_main" method="post">
+            <h2>Agriculture Production Optimization</h2>
+            <ol>
+                <li> <span>Nitrogen level</span> </li> 
+                <input type="number" placeholder="Enter value" name="Nitrogen">
+                <br> <br>
+
+                <li> <span>Phosphorous level</span> </li> 
+                <input type="number" placeholder="enter value" value="Phosphorous" name="Phosphorous">
+                    <br> <br>
+    
+                <li> <span>Pottasium level</span> </li> 
+                <input type="number" placeholder="enter value" value="Pottasium" name="Pottasium">
+                    <br> <br>
+    
+                <li> <span>Temperature level</span> </li> 
+                <input type="number" placeholder="enter value" value="Temperature" name="Temperature">
+                    <br> <br>
+    
+                <li> <span>Humidity level</span> </li> 
+                <input type="number" placeholder="enter value" value="Humidity" name="Humidity">
+                    <br> <br>
+    
+                <li> <span>PH level</span> </li> 
+                <input type="number" placeholder="enter value" value="PH" name="PH">
+                    <br> <br>
+    
+                <li> <span>Rainfall level</span> </li> 
+                <input type="number" placeholder="enter value" value="Rainfall" name="Rainfall">
+                    <br> <br>
+                
+
+            </ol>
+            <div class="form-group">
+                <input type="submit" name="submit" value="Submit" class="btn btn-md">
+            </div>
+        </form>
+    </div>
+    <script>
+        // Move focus to the next input on pressing Enter
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const activeElement = document.activeElement;
+                if (activeElement.tagName === 'INPUT') {
+                    const form = activeElement.closest('form');
+                    const inputs = Array.from(form.querySelectorAll('input'));
+                    const currentIndex = inputs.indexOf(activeElement);
+                    const nextIndex = (currentIndex + 1) % inputs.length;
+                    inputs[nextIndex].focus();
+                }
+            }
+        });
+    </script>
+        
+</body>
+</html>
