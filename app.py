@@ -1,18 +1,14 @@
-#Importing the libraries
 import pickle
 from flask import Flask, render_template, request
-#Global variables
+
+# Global variables
 app = Flask(__name__)
-loadedModel = pickle.load(open('agriculture.pkl', 'rb')) 
+loadedModel = pickle.load(open('agriculture.pkl', 'rb'))
 
-    
-#www.google.co.in/prediction
-
-#Routes
+# Routes
 @app.route('/')
 def home():
     return render_template('index.html')
-
 
 @app.route('/prediction', methods=['POST'])
 def prediction():
@@ -23,11 +19,16 @@ def prediction():
     humidity = int(request.form['Humidity'])
     ph = int(request.form['PH'])
     rainfall = int(request.form['Rainfall'])
-    
-    Suitable_Crop = loadedModel.predict([[N,P,K,temperature,humidity,ph,rainfall]])[0]
+
+    # Check input ranges
+    if not (0 <= N <= 150 and 0 <= P <= 150 and 0 <= K <= 210 and 5 <= temperature <= 50
+            and 10 <= humidity <= 100 and 1 <= ph <= 9 and 10 <= rainfall <= 300):
+        return render_template('result.html', output="Input values are not within suitable ranges.")
+
+    Suitable_Crop = loadedModel.predict([[N, P, K, temperature, humidity, ph, rainfall]])[0]
 
     return render_template('result.html', output=Suitable_Crop)
 
-#Main function
+# Main function
 if __name__ == '__main__':
     app.run(debug=True)
